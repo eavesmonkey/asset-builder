@@ -3,7 +3,7 @@ let config = require('./gulp.config.js');
 let browserSync = require('browser-sync');
 
 function style() {
-    return require('./tasks/styles').less(gulp, config.styles);
+    return require('./tasks/styles').sass(gulp, config.styles);
 }
 
 function script() {
@@ -29,9 +29,14 @@ function install() {
     return require('./tasks/install')(gulp);
 }
 
+function download() {
+    return require('./tasks/download')(gulp);
+}
+
 exports.style = style;
 exports.script = script;
 exports.templates = templates;
 exports.install = install;
+exports.download = download;
 exports.dev = gulp.series(script, style, templates, dev);
 exports.default = gulp.parallel(script, style, templates);
